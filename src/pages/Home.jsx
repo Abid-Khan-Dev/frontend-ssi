@@ -23,7 +23,11 @@ export default function Home() {
                 <Suspense fallback={<Loader />}>
                     <AboutSection />
                 </Suspense>
-                <EventsSection />
+
+                <Suspense fallback={<Loader />}>
+                    <EventsSection />
+                </Suspense>
+
                 <Suspense fallback={<Loader />}>
                     <CoursesSection />
                 </Suspense>

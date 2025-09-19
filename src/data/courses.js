@@ -100,3 +100,10 @@ export const Courses = [
     category: "Desktop",
   },
 ];
+
+export const referredByOptions = [
+  "Friend",
+  "SSI Student",
+  "College",
+  "Seminar",
+];

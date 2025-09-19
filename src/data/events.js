@@ -16,12 +16,6 @@ export const events = [
     image:
       "https://images.unsplash.com/photo-1472653431158-6364773b2a56?q=80&w=869&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
-  {
-    id: 3,
-    title: "New Freelancing Video",
-    date: "Today",
-    description: "Tomorrow is a public holiday for Eid celebrations.",
-  },
 
   {
     id: 4,
@@ -35,17 +29,5 @@ export const events = [
       "https://images.unsplash.com/photo-1472653431158-6364773b2a56?q=80&w=869&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     ],
     video: "",
-  },
-  {
-    id: 4,
-    title: "Chutti Announcement2",
-    date: "For Tomorrow",
-    description: "Tomorrow is a public holiday for Eid celebrations.",
-  },
-  {
-    id: 4,
-    title: "Chutti Announcement2",
-    date: "For Tomorrow",
-    description: "Tomorrow is a public holiday for Eid celebrations.",
   },
 ];

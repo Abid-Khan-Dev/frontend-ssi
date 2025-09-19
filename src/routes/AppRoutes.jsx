@@ -6,6 +6,7 @@ import { ErrorBoundary } from 'react-error-boundary';
 import ErrorFallback from '../components/common/ErrorFallback';
 import EventDetailsPage from '../pages/EventDetailsPage';
 import ResultsPage from '../pages/ResultsPage';
+import TermsAndCondition from '../pages/TermsAndCondition';
 
 const Home = React.lazy(() => import('../pages/Home'));
 const About = React.lazy(() => import('../pages/About'));
@@ -38,6 +39,7 @@ function AppRoutes() {
                             <Route path='/members' element={<MembersPage />} />
                             <Route path='/contact' element={<Contact />} />
                             <Route path='/about' element={<About />} />
+                            <Route path='/terms' element={<TermsAndCondition />} />
                         </Route>
                     </Routes>
                 </Suspense>
