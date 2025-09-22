@@ -1,3 +1,5 @@
+// Images sizes 206x176 recommended for better performance and quality
+
 export const achievements = [
   {
     title: "Project 1",

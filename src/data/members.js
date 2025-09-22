@@ -1,3 +1,5 @@
+// Images size 120x120 recommended for better performance and quality
+
 export const members = [
   {
     name: "Syed Munib (CEO)",

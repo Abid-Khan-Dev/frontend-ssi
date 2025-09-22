@@ -77,7 +77,6 @@ export default function ResultsPage() {
 
   return (
     <SectionContainer
-      bg="bg-gray-50 dark:bg-gray-900 transition-colors duration-500"
       id="results"
     >
       {/* Header */}

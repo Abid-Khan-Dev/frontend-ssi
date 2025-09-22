@@ -34,17 +34,18 @@ export default function EventCard({ event }) {
                             className="w-full h-full object-cover object-center"
                         />
 
+
                         {/* Media counters */}
                         {(imagesCount > 1 || videosCount > 0) && (
                             <div className="absolute bottom-2 right-2 flex space-x-2 bg-gray-800/60 dark:bg-gray-200/30 rounded-full px-3 py-1 text-white dark:text-gray-900 text-xs font-semibold">
                                 {imagesCount > 1 && (
-                                    <span className="flex items-center space-x-1">
+                                    <span className="flex items-center space-x-1 dark:text-white">
                                         <Image className="w-4 h-4" /> <span>{imagesCount}</span>
                                     </span>
                                 )}
                                 {videosCount > 0 && (
-                                    <span className="flex items-center space-x-1">
-                                        <Video className="w-4 h-4" /> <span>{videosCount}</span>
+                                    <span className="flex items-center space-x-1 dark:text-white">
+                                        <Video className="w-4 h-4 " /> <span>{videosCount}</span>
                                     </span>
                                 )}
                             </div>
@@ -60,7 +61,11 @@ export default function EventCard({ event }) {
                         )}
                     </div>
                 )}
-
+                {!event.images && event.videos?.[0] && (
+                    <div className="w-full h-full flex items-center justify-center bg-gray-200 dark:bg-gray-800">
+                        <Video className="w-12 h-12 text-gray-500" />
+                    </div>
+                )}
                 {/* Title */}
                 <h4 className="text-lg md:text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2 text-center truncate">
                     {event.title}

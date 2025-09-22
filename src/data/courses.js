@@ -1,3 +1,5 @@
+// Images size 1280 recommended for better performance and quality
+
 export const Courses = [
   {
     id: "cit",

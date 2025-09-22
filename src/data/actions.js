@@ -1,6 +1,5 @@
 import {
   FaWhatsapp,
-  FaFacebookMessenger,
   FaPhone,
   FaEnvelope,
   FaFacebookF,
