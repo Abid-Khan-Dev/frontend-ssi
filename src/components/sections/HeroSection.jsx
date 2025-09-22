@@ -111,7 +111,7 @@ function HeroSection() {
 
                 {/* Right 3D Model */}
                 <motion.div className="flex justify-center items-center h-[500px]" variants={modelVariants}>
-                    <ThreeModel modelPath={'/public/models/robot_playground.glb'} scale={2.2} alt="3D model of a robot" />
+                    <ThreeModel modelPath={'./models/robot_playground.glb'} scale={2.2} alt="3D model of a robot" />
                 </motion.div>
             </div>
 
