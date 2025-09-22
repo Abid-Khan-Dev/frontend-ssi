@@ -40,7 +40,14 @@ export default function Footer() {
 
             {/* Footer Note */}
             <div className="text-center text-gray-500 dark:text-gray-400 text-sm border-t border-gray-200 dark:border-gray-700 pt-6">
-                &copy; {new Date().getFullYear()} Syed Software Institute. All rights reserved. developed by <a href="https://github.com/Abid-Khan-Dev" target="_blank" className="text-sky-500 hover:underline">@Abid Khan</a>
+                &copy; {new Date().getFullYear()} Syed Software Institute. All rights reserved. Developed by   <a
+                    href="https://github.com/Abid-Khan-Dev"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sky-500 hover:underline"
+                >
+                    @AbidKhan
+                </a>
             </div>
         </footer>
     );
