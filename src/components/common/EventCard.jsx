@@ -1,73 +1,89 @@
-// import React from "react";
-// import Button from "./Button";
+import React, { useState } from "react";
+import EventModal from "./EventModal";
+import { Video, Image, Play, Calendar } from "lucide-react";
 
-// export default function EventCard({
-//     item
-// }) {
-//     return (
-//         <div
-//             className={`outline-2 outline-gray-200 dark:outline-gray-700
-//         relative flex flex-col justify-center items-center p-6 rounded-3xl
-//         shadow-sm hover:shadow-xl dark:shadow-gray-800 transform transition-shadow duration-300
-//         overflow-hidden max-w-sm mx-auto h-[380px] min-h-[380px] "bg-gray-100 dark:bg-gray-800"
-//       `}
-//         >
-//             {/* Image */}
-//             {item.images.map((img, idx) => {
-//                 <div
-//                     className={`
-//             relative overflow-hidden aspect-[16/9] w-full rounded-2xl border border-gray-300 dark:border-gray-700 mb-4 `}
-//                 >
-//                     <img
-//                         src={img}
-//                         alt={img}
-//                         className="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-105"
-//                     />
-//                 </div>
-//             })}
+export default function EventCard({ event }) {
+    const [open, setOpen] = useState(false);
+    const mediaItems = [...(event.images || []), ...(event.videos || [])];
 
-//             {/* Title */}
-//             {title && (
-//                 <h4
-//                     className={`
-//             ${variant === "member"
-//                             ? "text-xl md:text-2xl font-bold"
-//                             : "text-lg font-semibold"
-//                         }
-//             text-center
-//             text-gray-900 dark:text-gray-100
-//             mb-2
-//           `}
-//                 >
-//                     {title}
-//                 </h4>
-//             )}
+    const imagesCount = event.images?.length || 0;
+    const videosCount = event.videos?.length || 0;
 
-//             {/* Description */}
-//             {description && (
-//                 <p
-//                     className={`
-//             ${variant === "member"
-//                             ? "text-gray-700 dark:text-gray-300 text-sm md:text-base"
-//                             : "text-gray-600 dark:text-gray-400 text-sm"
-//                         }
-//             text-center mb-4 line-clamp-3 pb-1
-//           `}
-//                 >
-//                     {description}
-//                 </p>
-//             )}
 
-//             {/* Button */}
-//             {buttonText && <Button onClick={onClick}>{buttonText}</Button>}
+    return (
+        <>
+            <div
+                className={`
+          relative flex flex-col justify-start items-center p-6 rounded-3xl
+          shadow-sm hover:shadow-xl dark:shadow-gray-800 transform transition duration-300
+          overflow-hidden max-w-sm mx-auto h-[400px] min-h-[400px]
+          bg-white dark:bg-gray-900 cursor-pointer
+          outline-2 outline-gray-200 dark:outline-gray-700
+          group
+        `}
+                onClick={() => setOpen(true)}
+            >
 
-//             {/* Optional floating accents for members */}
-//             {variant === "member" && (
-//                 <>
-//                     <div className="absolute -top-6 -left-6 w-16 h-16 bg-gradient-to-tr from-blue-500 to-cyan-600 rounded-full opacity-20 blur-2xl pointer-events-none animate-pulse"></div>
-//                     <div className="absolute -bottom-6 -right-6 w-12 h-12 bg-gradient-to-tr from-pink-500 to-purple-600 rounded-full opacity-20 blur-xl pointer-events-none animate-[spin_15s_linear_infinite]"></div>
-//                 </>
-//             )}
-//         </div>
-//     );
-// }
+
+                {/* Media Thumbnail */}
+                {event.images?.[0] && (
+                    <div className="relative overflow-hidden aspect-[16/9] w-full rounded-2xl border border-gray-300 dark:border-gray-700 mb-4 group-hover:scale-105 transition-transform duration-300">
+                        <img
+                            src={event.images[0]}
+                            alt={event.title}
+                            className="w-full h-full object-cover object-center"
+                        />
+
+                        {/* Media counters */}
+                        {(imagesCount > 1 || videosCount > 0) && (
+                            <div className="absolute bottom-2 right-2 flex space-x-2 bg-gray-800/60 dark:bg-gray-200/30 rounded-full px-3 py-1 text-white dark:text-gray-900 text-xs font-semibold">
+                                {imagesCount > 1 && (
+                                    <span className="flex items-center space-x-1">
+                                        <Image className="w-4 h-4" /> <span>{imagesCount}</span>
+                                    </span>
+                                )}
+                                {videosCount > 0 && (
+                                    <span className="flex items-center space-x-1">
+                                        <Video className="w-4 h-4" /> <span>{videosCount}</span>
+                                    </span>
+                                )}
+                            </div>
+                        )}
+
+                        {/* Play Icon overlay if there is video */}
+                        {videosCount > 0 && (
+                            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                                <div className="bg-white/60 dark:bg-gray-800/60 rounded-full p-4 animate-pulse">
+                                    <Play className="w-6 h-6 text-gray-900 dark:text-white" />
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                )}
+
+                {/* Title */}
+                <h4 className="text-lg md:text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2 text-center truncate">
+                    {event.title}
+                </h4>
+
+                {/* Description */}
+                <p className="text-sm md:text-base text-gray-600 dark:text-gray-400 text-center line-clamp-3 flex-1">
+                    {event.description}
+                </p>
+
+                {/* Click hint */}
+                <span className="mt-2 text-xs text-blue-600 dark:text-blue-400 font-medium">
+                    📅 View Event Details
+                </span>
+            </div>
+
+            {open && (
+                <EventModal
+                    items={mediaItems}
+                    initialIndex={0}
+                    onClose={() => setOpen(false)}
+                />
+            )}
+        </>
+    );
+}

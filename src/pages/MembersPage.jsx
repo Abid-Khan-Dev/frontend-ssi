@@ -1,5 +1,4 @@
-// src/pages/MembersPage.jsx
-import React from "react";
+import React, { useMemo } from "react";
 import { motion } from "framer-motion";
 import SectionContainer from "../components/common/SectionContainer";
 import SectionHeader from "../components/common/SectionHeader";
@@ -18,6 +17,9 @@ export default function MembersPage() {
         show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
     };
 
+    // Memoize members to avoid recalculation on every render
+    const memoizedMembers = useMemo(() => members, []);
+
     return (
         <SectionContainer bg="bg-white dark:bg-gray-900 transition-colors duration-500">
             {/* Page Header */}
@@ -35,9 +37,9 @@ export default function MembersPage() {
                 whileInView="show"
                 viewport={{ once: true, amount: 0.2 }}
             >
-                {members.map((member, index) => (
+                {memoizedMembers.map((member, index) => (
                     <motion.div key={index} variants={cardVariants}>
-                        <Card
+                        <MemoCard
                             image={member.image}
                             title={member.name}
                             description={member.role}
@@ -49,3 +51,6 @@ export default function MembersPage() {
         </SectionContainer>
     );
 }
+
+// Wrap Card in React.memo for memoization
+const MemoCard = React.memo(Card);

@@ -1,33 +1,32 @@
-import syedMunib from "../assets/members/syed-munib-ceo.webp";
-import ahmadHamid from "../assets/members/ahmad-hamid-cofounder.webp";
-import azamSir from "../assets/members/azam-sir.webp";
-import wahabSir from "../assets/members/wahab-sir.webp";
-import muhammadIbrahim from "../assets/members/muhammad-ibrahim.webp";
-
 export const members = [
   {
     name: "Syed Munib (CEO)",
     role: "BSCS graduate skilled in 3D design, graphics, freelancing, game development, social media",
-    image: syedMunib,
+    image:
+      "https://res.cloudinary.com/dhnkdcbz4/image/upload/v1758515352/syed-munib-ceo_xntstx.webp",
   },
   {
     name: "Ahmad Hamid (Co-founder)",
     role: "BSCS graduate currently working in a Dubai-based tech company with professional expertise",
-    image: ahmadHamid,
+    image:
+      "https://res.cloudinary.com/dhnkdcbz4/image/upload/v1758515354/ahmad-hamid-cofounder_aqxy4g.webp",
   },
   {
     name: "Azam Sir",
     role: "BSCS graduate skilled in graphic design, web development, and creative digital solutions",
-    image: azamSir,
+    image:
+      "https://res.cloudinary.com/dhnkdcbz4/image/upload/v1758515354/azam-sir_y2fs9n.webp",
   },
   {
     name: "Wahab Sir",
     role: "BS graduate, civil engineer, AutoCAD and computer expert with technical project experience",
-    image: wahabSir,
+    image:
+      "https://res.cloudinary.com/dhnkdcbz4/image/upload/v1758515358/wahab-sir_llhmyy.webp",
   },
   {
     name: "Muhammed Ibrahim",
     role: "MERN and Next.js developer creating amazing modern responsive webapps",
-    image: muhammadIbrahim,
+    image:
+      "https://res.cloudinary.com/dhnkdcbz4/image/upload/v1758515357/muhammad-ibrahim_w361uh.webp",
   },
 ];

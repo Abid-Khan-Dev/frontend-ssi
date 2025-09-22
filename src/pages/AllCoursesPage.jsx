@@ -1,4 +1,5 @@
-import React from "react";
+// src/pages/AllCoursesPage.jsx
+import React, { useMemo, useCallback } from "react";
 import { Courses } from "../data/courses";
 import { motion } from "framer-motion";
 import Card from "../components/common/Card";
@@ -9,16 +10,24 @@ import { useNavigate } from "react-router-dom";
 export default function AllCoursesPage() {
     const navigate = useNavigate();
 
-    // Animations
-    const containerVariants = {
+    // Memoized courses list
+    const coursesList = useMemo(() => Courses, []);
+
+    // Memoized click handler
+    const handleCardClick = useCallback((id) => {
+        navigate(`/course/${id}`);
+    }, [navigate]);
+
+    // Motion variants
+    const containerVariants = useMemo(() => ({
         hidden: {},
         show: { transition: { staggerChildren: 0.15 } },
-    };
+    }), []);
 
-    const cardVariants = {
+    const cardVariants = useMemo(() => ({
         hidden: { opacity: 0, y: 30 },
         show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
-    };
+    }), []);
 
     return (
         <SectionContainer
@@ -40,15 +49,15 @@ export default function AllCoursesPage() {
                 whileInView="show"
                 viewport={{ once: true, amount: 0.2 }}
             >
-                {Courses.map((course, idx) => (
-                    <motion.div key={idx} variants={cardVariants}>
+                {coursesList.map((course, idx) => (
+                    <motion.div key={course.id} variants={cardVariants}>
                         <Card
                             image={course.image}
                             title={course.title}
                             description={course.desc}
                             buttonText="View Details"
                             variant="course"
-                            onClick={() => navigate(`/course/${course.id}`)}
+                            onClick={() => handleCardClick(course.id)}
                         />
                     </motion.div>
                 ))}

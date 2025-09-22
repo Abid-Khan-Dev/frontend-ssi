@@ -1,4 +1,3 @@
-// src/components/common/Card.jsx
 import React from "react";
 import Button from "./Button";
 
@@ -12,26 +11,19 @@ export default function Card({
 }) {
     return (
         <div
-            className={`outline-2 outline-gray-200 dark:outline-gray-700
+            className="outline-2 outline-gray-200 dark:outline-gray-700
         relative flex flex-col justify-center items-center p-6 rounded-3xl
         shadow-sm hover:shadow-xl dark:shadow-gray-800 transform transition-shadow duration-300
-        overflow-hidden max-w-sm mx-auto h-[380px] min-h-[380px]
-
-        ${variant === "member"
-                    ? "bg-white dark:bg-gray-900"
-                    : "bg-gray-100 dark:bg-gray-800"
-                }
-      `}
+        overflow-hidden max-w-sm mx-auto h-[380px] min-h-[380px] bg-white dark:bg-gray-900"
         >
             {/* Image */}
             {image && (
                 <div
-                    className={`
-            relative overflow-hidden
+                    className={`relative overflow-hidden
             ${variant === "member"
                             ? "aspect-square w-32 rounded-full border-4 border-gray-200 dark:border-gray-700 mb-4"
                             : "aspect-[16/9] w-full rounded-2xl border border-gray-300 dark:border-gray-700 mb-4"
-                        }
+                        } 
           `}
                 >
                     <img
@@ -50,8 +42,7 @@ export default function Card({
                             ? "text-xl md:text-2xl font-bold"
                             : "text-lg font-semibold"
                         } 
-            text-center 
-            text-gray-900 dark:text-gray-100
+            text-center text-gray-900 dark:text-gray-100
             mb-2
           `}
                 >

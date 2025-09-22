@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import logoImage from "../../assets/logo.webp";
 import NavigationLinks from "../common/NavigationLinks";
 import { navLinks } from "../../data/navLinks.js";
 import { Moon, Sun, Menu, X } from "lucide-react";
@@ -59,7 +58,7 @@ export default function Header() {
                 <div className="flex items-center gap-3">
                     <Link to="/">
                         <motion.img
-                            src={logoImage}
+                            src='https://res.cloudinary.com/dhnkdcbz4/image/upload/v1758515661/logo_igh9nz.webp'
                             alt="logo"
                             className="h-10 w-10 rounded-full"
                             whileHover={{ scale: 1.05 }}

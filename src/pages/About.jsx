@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/common/Button";
+import { IoArrowBack } from "react-icons/io5";
 
 export default function About() {
     const navigate = useNavigate();
+
+    // Memoize motion variants for consistent performance
+    const fadeUpVariant = useMemo(() => ({
+        hidden: { opacity: 0, y: 20 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+    }), []);
+
+    const fadeDownVariant = useMemo(() => ({
+        hidden: { opacity: 0, y: -30 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
+    }), []);
 
     return (
         <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-500 px-6 py-16">
@@ -12,9 +24,9 @@ export default function About() {
                 {/* Heading */}
                 <motion.h1
                     className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6"
-                    initial={{ opacity: 0, y: -30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
+                    initial="hidden"
+                    animate="visible"
+                    variants={fadeDownVariant}
                 >
                     About Syed Software Institute
                 </motion.h1>
@@ -36,8 +48,9 @@ export default function About() {
                 <div className="grid md:grid-cols-2 gap-8 mb-10">
                     <motion.div
                         className="p-6 rounded-xl bg-gray-100 dark:bg-gray-800 shadow-md"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
+                        initial="hidden"
+                        animate="visible"
+                        variants={fadeUpVariant}
                         transition={{ delay: 0.4 }}
                     >
                         <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
@@ -51,8 +64,9 @@ export default function About() {
 
                     <motion.div
                         className="p-6 rounded-xl bg-gray-100 dark:bg-gray-800 shadow-md"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
+                        initial="hidden"
+                        animate="visible"
+                        variants={fadeUpVariant}
                         transition={{ delay: 0.6 }}
                     >
                         <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
@@ -67,7 +81,7 @@ export default function About() {
 
                 {/* Back Button */}
                 <Button variant="secondary" onClick={() => navigate("/")}>
-                    ← Back to Home
+                    <IoArrowBack className="w-4 h-4 mr-2" /> Back to Home
                 </Button>
             </div>
         </div>

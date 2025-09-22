@@ -4,6 +4,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "../components/common/ErrorFallback";
 import EventsSection from "../components/sections/EventsSection";
 
+// Lazy-loaded sections
 const HeroSection = React.lazy(() => import("../components/sections/HeroSection"));
 const AboutSection = React.lazy(() => import("../components/sections/AboutSection"));
 const CoursesSection = React.lazy(() => import("../components/sections/CoursesSection"));
@@ -14,40 +15,17 @@ const ContactSection = React.lazy(() => import("../components/sections/ContactSe
 
 export default function Home() {
     return (
-        <>
-            <ErrorBoundary FallbackComponent={ErrorFallback}>
-                <Suspense fallback={<Loader />}>
-                    <HeroSection />
-                </Suspense>
-
-                <Suspense fallback={<Loader />}>
-                    <AboutSection />
-                </Suspense>
-
-                <Suspense fallback={<Loader />}>
-                    <EventsSection />
-                </Suspense>
-
-                <Suspense fallback={<Loader />}>
-                    <CoursesSection />
-                </Suspense>
-
-                <Suspense fallback={<Loader />}>
-                    <AdmissionsSection />
-                </Suspense>
-
-                <Suspense fallback={<Loader />}>
-                    <AchievementsSection />
-                </Suspense>
-
-                <Suspense fallback={<Loader />}>
-                    <MembersSection />
-                </Suspense>
-
-                <Suspense fallback={<Loader />}>
-                    <ContactSection />
-                </Suspense>
-            </ErrorBoundary>
-        </>
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <Suspense fallback={<Loader />}>
+                <HeroSection />
+                <AboutSection />
+                <EventsSection />
+                <CoursesSection />
+                <AdmissionsSection />
+                <AchievementsSection />
+                <MembersSection />
+                <ContactSection />
+            </Suspense>
+        </ErrorBoundary>
     );
 }

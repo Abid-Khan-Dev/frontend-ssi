@@ -1,78 +1,81 @@
-// src/pages/EnrollPage.jsx
-import React from "react";
+import React, { useState, useCallback } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import SectionContainer from "../components/common/SectionContainer";
 import Button from "../components/common/Button";
+import InputBox from "../components/common/InputBox";
 import { Courses, referredByOptions } from "../data/courses";
 import api from "../../services/api";
-import InputBox from "../components/common/InputBox";
 
 export default function EnrollPage() {
     const navigate = useNavigate();
     const location = useLocation();
-    const [formData, setFormData] = React.useState({
+
+    // Single state for form
+    const [formData, setFormData] = useState({
         name: "",
         fatherName: "",
         education: "",
         address: "",
         email: "",
         phoneNO: "",
-        applyFor: "",
+        applyFor: location.state?.selectedCourse || "",
         referredBy: "",
+        terms: false,
     });
-    const [selectedCourse, setSelectedCourse] = React.useState(location.state?.selectedCourse || "");
-    const [selectedReferredBy, setSelectedReferredBy] = React.useState('');
-    const [agreeTerms, setAgreeTerms] = React.useState(false);
 
+    // Handle input change
+    const handleChange = useCallback((e) => {
+        const { name, value, type, checked } = e.target;
+        setFormData((prev) => ({
+            ...prev,
+            [name]: type === "checkbox" ? checked : value,
+        }));
+    }, []);
 
+    // Submit handler
+    const handleSubmit = useCallback(
+        async (e) => {
+            e.preventDefault();
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-    };
-
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        console.log(e);
-        if (!selectedCourse) {
-            alert("Please select a course.");
-            return;
-        }
-        const existingEnrollment = localStorage.getItem('enrollmentData');
-
-        if (existingEnrollment) {
-            const confirmOverwrite = window.confirm("You have already enrolled. Do you want to overwrite your previous enrollment?");
-
-            if (!confirmOverwrite) {
+            if (!formData.applyFor) {
+                alert("Please select a course.");
                 return;
             }
-        }
-        const response = await api.post("/enroll", { ...formData, applyFor: selectedCourse, referredBy: selectedReferredBy, terms: agreeTerms }
-        );
-        if (response.status === 200) {
-            alert("Enrollment successful!");
-            localStorage.setItem('enrollmentData', JSON.stringify({ ...formData, applyFor: selectedCourse }));
-            navigate("/");
 
-        }
-    };
+            // Check duplicate enrollment in localStorage
+            const existingEnrollment = localStorage.getItem("enrollmentData");
+            if (existingEnrollment) {
+                const confirmOverwrite = window.confirm(
+                    "You have already enrolled. Do you want to overwrite your previous enrollment?"
+                );
+                if (!confirmOverwrite) return;
+            }
 
+            try {
+                const response = await api.post("/enroll", formData);
+                if (response.status === 200) {
+                    alert("Enrollment successful!");
+                    localStorage.setItem("enrollmentData", JSON.stringify(formData));
+                    navigate("/");
+                }
+            } catch (err) {
+                console.error(err);
+                alert("Something went wrong. Please try again.");
+            }
+        },
+        [formData, navigate]
+    );
 
-
-    // motion variants
+    // Motion variants
     const containerVariants = {
         hidden: { opacity: 0, y: 20 },
         visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
     };
-
     const staggerContainer = {
         hidden: {},
-        visible: { transition: { staggerChildren: 0.2 } },
+        visible: { transition: { staggerChildren: 0.15 } },
     };
-
-
 
     return (
         <SectionContainer>
@@ -86,7 +89,6 @@ export default function EnrollPage() {
                 >
                     Enroll Today
                 </motion.h1>
-
                 <motion.p
                     className="text-gray-700 dark:text-gray-300 mb-10 text-lg"
                     initial={{ opacity: 0 }}
@@ -104,36 +106,66 @@ export default function EnrollPage() {
                     initial="hidden"
                     animate="visible"
                 >
-
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {/* Name */}
                         <motion.div variants={containerVariants}>
-                            <InputBox label='Name*' placeholder='Enter your name' value={formData.name} name='name' onChange={handleChange} required />
+                            <InputBox
+                                label="Name*"
+                                placeholder="Enter your name"
+                                name="name"
+                                value={formData.name}
+                                onChange={handleChange}
+                                required
+                            />
                         </motion.div>
 
-
-                        {/* father name */}
+                        {/* Father Name */}
                         <motion.div variants={containerVariants}>
-                            <InputBox label='Father Name (Optional)' placeholder='Your father name' value={formData.fatherName} name='fatherName' onChange={handleChange} />
+                            <InputBox
+                                label="Father Name (Optional)"
+                                placeholder="Your father name"
+                                name="fatherName"
+                                value={formData.fatherName}
+                                onChange={handleChange}
+                            />
                         </motion.div>
 
                         {/* Phone Number */}
                         <motion.div variants={containerVariants}>
-                            <InputBox label='Phone Number*' required type="tel" placeholder='+92 300 1234567' value={formData.phoneNO} name='phoneNO' onChange={handleChange} />
+                            <InputBox
+                                label="Phone Number*"
+                                type="tel"
+                                placeholder="+92 300 1234567"
+                                name="phoneNO"
+                                value={formData.phoneNO}
+                                onChange={handleChange}
+                                required
+                            />
                         </motion.div>
-
 
                         {/* Email */}
                         <motion.div variants={containerVariants}>
-                            <InputBox label='Email (Optional)' type="email" placeholder='you@example.com' value={formData.email} name='email' onChange={handleChange} />
+                            <InputBox
+                                label="Email (Optional)"
+                                type="email"
+                                placeholder="you@example.com"
+                                name="email"
+                                value={formData.email}
+                                onChange={handleChange}
+                            />
                         </motion.div>
 
-
-
-
-                        {/* education background */}
+                        {/* Education */}
                         <motion.div variants={containerVariants}>
-                            <InputBox label='Education Background*' required type="text" placeholder='Your education background' value={formData.education} name='education' onChange={handleChange} />
+                            <InputBox
+                                label="Education Background*"
+                                type="text"
+                                placeholder="Your education background"
+                                name="education"
+                                value={formData.education}
+                                onChange={handleChange}
+                                required
+                            />
                         </motion.div>
 
                         {/* Referred By */}
@@ -142,42 +174,40 @@ export default function EnrollPage() {
                                 Referred By
                             </label>
                             <select
-                                onChange={(e) => setSelectedReferredBy(e.target.value)}
                                 name="referredBy"
-                                defaultValue={selectedReferredBy} // preselect course if passed from CourseDetails
+                                value={formData.referredBy}
+                                onChange={handleChange}
                                 className="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-700
-                                bg-white dark:bg-gray-900 text-gray-900 dark:text-white
-                                focus:ring-2 focus:ring-sky-400 outline-none"
+                  bg-white dark:bg-gray-900 text-gray-900 dark:text-white
+                  focus:ring-2 focus:ring-sky-400 outline-none"
                             >
                                 <option value="">Select a Referrer</option>
-                                {referredByOptions.map((referredBy, idx) => (
-                                    <option key={idx} value={referredBy}>
-                                        {referredBy}
+                                {referredByOptions.map((option, idx) => (
+                                    <option key={idx} value={option}>
+                                        {option}
                                     </option>
                                 ))}
                             </select>
                         </motion.div>
                     </div>
 
-                    {/*  Address */}
+                    {/* Address */}
                     <motion.div variants={containerVariants}>
                         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                             Address*
                         </label>
                         <textarea
                             className="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-700
-                                bg-white dark:bg-gray-900 text-gray-900 dark:text-white
-                                focus:ring-2 focus:ring-sky-400 outline-none resize-none"
+                bg-white dark:bg-gray-900 text-gray-900 dark:text-white
+                focus:ring-2 focus:ring-sky-400 outline-none resize-none"
                             rows="3"
-                            placeholder="Your Address*"
+                            name="address"
                             value={formData.address}
-                            name='address'
                             onChange={handleChange}
+                            placeholder="Your Address*"
                             required
                         ></textarea>
-
                     </motion.div>
-
 
                     {/* Course Dropdown */}
                     <motion.div variants={containerVariants}>
@@ -185,13 +215,13 @@ export default function EnrollPage() {
                             Course Interested*
                         </label>
                         <select
-                            onChange={(e) => setSelectedCourse(e.target.value)}
                             name="applyFor"
+                            value={formData.applyFor}
+                            onChange={handleChange}
                             required
-                            defaultValue={selectedCourse}
-                            className="w-full  p-3 rounded-lg border border-gray-300 dark:border-gray-700
-                                bg-white dark:bg-gray-900 text-gray-900 dark:text-white
-                                focus:ring-2 focus:ring-sky-400 outline-none"
+                            className="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-700
+                bg-white dark:bg-gray-900 text-gray-900 dark:text-white
+                focus:ring-2 focus:ring-sky-400 outline-none"
                         >
                             <option value="">Select a course</option>
                             {Courses.map((course) => (
@@ -202,20 +232,26 @@ export default function EnrollPage() {
                         </select>
                     </motion.div>
 
-                    {/* terms and conditions */}
+                    {/* Terms */}
                     <motion.div variants={containerVariants}>
                         <label className="flex items-center">
                             <input
                                 type="checkbox"
                                 name="terms"
-                                onChange={(e) => setAgreeTerms(e.target.checked)}
-                                checked={agreeTerms}
+                                checked={formData.terms}
+                                onChange={handleChange}
                                 required
-                                className="mr-2 "
+                                className="mr-2"
                             />
-                            <span className="text-gray-700 dark:text-gray-300"> I agree to the <Link to="/terms" className="text-sky-600 hover:underline ml-1"> terms and conditions</Link>.</span>
+                            <span className="text-gray-700 dark:text-gray-300">
+                                I agree to the
+                                <Link to="/terms" className="text-sky-600 hover:underline ml-1">
+                                    terms and conditions
+                                </Link>.
+                            </span>
                         </label>
                     </motion.div>
+
                     {/* Buttons */}
                     <motion.div className="flex flex-wrap gap-4" variants={containerVariants}>
                         <Button variant="primary" type="submit">

@@ -23,7 +23,7 @@ export default function AchievementsSection() {
 
 
     return (
-        <SectionContainer bg="bg-white dark:bg-gray-900" id="projects">
+        <SectionContainer id="projects">
             <SectionHeader
                 title="Our Achievements"
                 subtitle="Projects That Showcase Our Expertise"
