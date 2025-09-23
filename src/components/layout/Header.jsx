@@ -52,7 +52,7 @@ export default function Header() {
                 initial={{ y: -30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.6, ease: "easeOut" }}
-                className="max-w-7xl mx-auto flex items-center justify-between px-6 py-3 transition-colors duration-300"
+                className="mx-auto flex items-center justify-between px-6 py-3 transition-colors duration-300"
             >
                 {/* Logo */}
                 <div className="flex items-center gap-3">
@@ -60,7 +60,7 @@ export default function Header() {
                         <motion.img
                             src='https://res.cloudinary.com/dhnkdcbz4/image/upload/v1758515661/logo_igh9nz.webp'
                             alt="logo"
-                            className="h-10 w-10 rounded-full"
+                            className="h-12 w-12 rounded-full"
                             whileHover={{ scale: 1.05 }}
                             transition={{ type: "spring", stiffness: 300 }}
                         />
