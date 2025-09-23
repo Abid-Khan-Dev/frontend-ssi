@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { Courses } from "../data/courses";
 import Button from "../components/common/Button";
 import SectionContainer from "../components/common/SectionContainer";
@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 export default function CourseDetailsPage() {
     const { id } = useParams();
     const navigate = useNavigate();
+
 
     // Memoize course lookup
     const course = useMemo(() => Courses.find((c) => c.id === id), [id]);

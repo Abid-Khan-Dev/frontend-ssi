@@ -11,6 +11,7 @@ export default function EnrollPage() {
     const navigate = useNavigate();
     const location = useLocation();
 
+
     // Single state for form
     const [formData, setFormData] = useState({
         name: "",
@@ -225,7 +226,7 @@ export default function EnrollPage() {
                         >
                             <option value="">Select a course</option>
                             {Courses.map((course) => (
-                                <option key={course.id} value={course.name}>
+                                <option key={course.id} value={course.id}>
                                     {course.title}
                                 </option>
                             ))}

@@ -76,6 +76,7 @@ function HeroSection() {
         visible: { opacity: 1, x: 0, scale: 1, transition: { delay: 0.8, duration: 0.8, ease: "easeOut" } },
     };
 
+
     return (
         <section className="relative flex items-center justify-center min-h-screen 
             bg-gradient-to-b from-sky-50 to-white 
@@ -111,6 +112,7 @@ function HeroSection() {
 
                 {/* Right 3D Model */}
                 <motion.div className="flex justify-center items-center h-[500px]" variants={modelVariants}>
+
                     <ThreeModel modelPath={'./models/robot_playground.glb'} scale={2.2} alt="3D model of a robot" />
                 </motion.div>
             </div>
