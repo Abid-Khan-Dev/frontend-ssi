@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useMemo } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, delay } from "framer-motion";
 import { actions } from "../../data/actions";
 
 const StickyActions = React.memo(() => {
@@ -63,7 +63,7 @@ const StickyActions = React.memo(() => {
     );
 
     return (
-        <div className="fixed right-6 md:right-[56px] bottom-6 z-50 flex flex-col items-center gap-3">
+        <div className="fixed right-6 md:right-[25px] bottom-6 z-50 flex flex-col items-center gap-3">
             {/* Toggle Button */}
             <button
                 onClick={toggleVisibility}
