@@ -20,30 +20,30 @@ const TermsAndCondition = React.lazy(() => import('../pages/TermsAndCondition'))
 function AppRoutes() {
     return (
         <>
-            <ErrorBoundary FallbackComponent={ErrorFallback}>
+            {/* <ErrorBoundary FallbackComponent={ErrorFallback}> */}
 
-                <Suspense fallback={<Loader />}>
-                    <Routes>
-                        {/* Public Routes */}
-                        <Route element={<Layout />}>
-                            <Route path='/' element={<Home />} />
-                            <Route path='/courses' element={<AllCoursesPage />} />
-                            <Route path="/course/:id" element={<CourseDetailsPage />} />
-                            <Route path="/enroll" element={<EnrollPage />} />
-                            <Route path="/events" element={<EventsPage />} />
-                            <Route path="/results" element={<ResultsPage />} />
+            <Suspense fallback={<Loader />}>
+                <Routes>
+                    {/* Public Routes */}
+                    <Route element={<Layout />}>
+                        <Route path='/' element={<Home />} />
+                        <Route path='/courses' element={<AllCoursesPage />} />
+                        <Route path="/course/:id" element={<CourseDetailsPage />} />
+                        <Route path="/enroll" element={<EnrollPage />} />
+                        <Route path="/events" element={<EventsPage />} />
+                        <Route path="/results" element={<ResultsPage />} />
 
 
-                            <Route path='/members' element={<MembersPage />} />
-                            <Route path='/contact' element={<Contact />} />
-                            <Route path='/about' element={<About />} />
-                            <Route path='/terms' element={<TermsAndCondition />} />
-                            <Route path="*" element={<Navigate to="/" replace />} />
+                        <Route path='/members' element={<MembersPage />} />
+                        <Route path='/contact' element={<Contact />} />
+                        <Route path='/about' element={<About />} />
+                        <Route path='/terms' element={<TermsAndCondition />} />
+                        <Route path="*" element={<Navigate to="/" replace />} />
 
-                        </Route>
-                    </Routes>
-                </Suspense>
-            </ErrorBoundary>
+                    </Route>
+                </Routes>
+            </Suspense>
+            {/* </ErrorBoundary> */}
         </>
     )
 }

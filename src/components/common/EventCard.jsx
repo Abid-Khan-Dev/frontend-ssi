@@ -66,6 +66,7 @@ export default function EventCard({ event }) {
                         <Video className="w-12 h-12 text-gray-500" />
                     </div>
                 )}
+                {/* <div className={`flex flex-col items-center text-center space-y-3 `}> */}
                 {/* Title */}
                 <h4 className="text-lg md:text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2 text-center truncate">
                     {event.title}
@@ -75,6 +76,7 @@ export default function EventCard({ event }) {
                 <p className="text-sm md:text-base text-gray-600 dark:text-gray-400 text-center line-clamp-3 flex-1">
                     {event.description}
                 </p>
+                {/* </div> */}
 
                 {/* Click hint */}
                 <span className="mt-2 text-xs text-blue-600 dark:text-blue-400 font-medium">

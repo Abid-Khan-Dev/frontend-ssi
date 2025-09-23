@@ -22,18 +22,18 @@ export default function Home() {
     return (
         <>
 
-            <ErrorBoundary FallbackComponent={ErrorFallback}>
-                <Suspense fallback={<Loader />}>
-                    <HeroSection />
-                    <AboutSection />
-                    <EventsSection />
-                    <CoursesSection />
-                    <AdmissionsSection />
-                    <AchievementsSection />
-                    <MembersSection />
-                    <ContactSection />
-                </Suspense>
-            </ErrorBoundary>
+            {/* <ErrorBoundary FallbackComponent={ErrorFallback}> */}
+            <Suspense fallback={<Loader />}>
+                <HeroSection />
+                <AboutSection />
+                <EventsSection />
+                <CoursesSection />
+                <AdmissionsSection />
+                <AchievementsSection />
+                <MembersSection />
+                <ContactSection />
+            </Suspense>
+            {/* </ErrorBoundary> */}
 
         </>
     );

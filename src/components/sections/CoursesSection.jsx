@@ -32,7 +32,7 @@ export default function CoursesSection() {
 
             {/* Display top 3 courses */}
             <motion.div
-                className="grid sm:grid-cols-2 md:grid-cols-3 gap-8 mt-12"
+                className="grid sm:grid-cols-2 md:grid-cols-3 gap-8  mt-12"
                 variants={containerVariants}
                 initial="hidden"
                 whileInView="show"

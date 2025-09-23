@@ -4,7 +4,7 @@ export const events = [
   {
     id: 0,
     title: "Seminar on AI",
-    date: "2025-09-22", // ✅ ISO format
+    date: "2025-09-23", // ✅ ISO format
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     videos: ["https://youtu.be/fErFZQelHlg?si=gy91GmqPN7OHAlX2"],
@@ -20,10 +20,6 @@ export const events = [
     date: "2025-09-25", // ✅ ISO format
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    images: [
-      "https://images.unsplash.com/photo-1561489396-888724a1543d?q=80&w=870&auto=format&fit=crop",
-    ],
-    videos: [],
   },
   {
     id: 2,
