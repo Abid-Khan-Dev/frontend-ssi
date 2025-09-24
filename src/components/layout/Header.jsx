@@ -20,9 +20,13 @@ export default function Header() {
 
     useEffect(() => {
         const savedTheme = localStorage.getItem("theme");
-        if (savedTheme === "dark") {
+        if (savedTheme) {
+            document.documentElement.classList.toggle("dark", savedTheme === "dark");
+            setIsDark(true);
+        } else {
             document.documentElement.classList.add("dark");
             setIsDark(true);
+            localStorage.setItem("theme", "dark");
         }
 
         const handleScroll = () => setScrolled(window.scrollY > 10);
