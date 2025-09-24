@@ -25,7 +25,9 @@ export default function EventsSectionHome() {
         description="Check out the latest happenings at SSI."
       />
 
-      <motion.div className="grid sm:grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+      <motion.div
+        className="flex flex-wrap justify-center gap-6 mt-8"
+      >
         {displayedEvents.map((event, idx) => (
           <motion.div
             key={event.id + idx}
@@ -33,11 +35,13 @@ export default function EventsSectionHome() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.5, ease: "easeOut", delay: idx * 0.1 }}
+          // className="w-full sm:w-[48%] md:w-[31%] lg:w-[30%] xl:w-[23%]"
           >
             <EventCard event={event} variant="default" />
           </motion.div>
         ))}
       </motion.div>
+
 
       {events.length > ITEMS_TO_SHOW && (
         <div className="flex justify-center mt-6">

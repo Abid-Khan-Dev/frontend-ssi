@@ -21,7 +21,7 @@ export default function Card({
                 <div
                     className={`relative overflow-hidden
             ${variant === "member"
-                            ? "aspect-square w-32 rounded-full border-4 border-gray-200 dark:border-gray-700 mb-4"
+                            ? "aspect-square w-36 rounded-full border-4 border-gray-200 dark:border-gray-700 mb-4"
                             : "aspect-[16/9] w-full rounded-2xl border border-gray-300 dark:border-gray-700 mb-4"
                         } 
           `}

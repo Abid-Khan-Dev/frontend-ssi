@@ -1,11 +1,24 @@
-import React, { useState, useCallback, useMemo } from "react";
-import { motion, AnimatePresence, delay } from "framer-motion";
+import React, { useState, useCallback, useMemo, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { actions } from "../../data/actions";
 
 const StickyActions = React.memo(() => {
-    const [isVisible, setIsVisible] = useState(true);
+    const [isVisible, setIsVisible] = useState(true); // initially hidden
+    const [pageLoaded, setPageLoaded] = useState(false); // track full page load
 
     const toggleVisibility = useCallback(() => setIsVisible((v) => !v), []);
+
+    // Detect when page is fully loaded
+    useEffect(() => {
+        if (document.readyState === "complete") {
+            setTimeout(() => setPageLoaded(true), 1000); // 1s delay after page fully loaded
+        } else {
+            const handleLoad = () => setTimeout(() => setPageLoaded(true), 1500);
+            window.addEventListener("load", handleLoad);
+            return () => window.removeEventListener("load", handleLoad);
+        }
+    }, []);
+
 
     // Animation variants
     const containerVariants = useMemo(
@@ -36,23 +49,22 @@ const StickyActions = React.memo(() => {
                     title={action.label}
                     variants={itemVariants}
                     className={`
-            group relative w-10 h-10 rounded-full flex items-center justify-center
-            bg-gray-100 dark:bg-gray-800 shadow-sm
-            transition-transform duration-200 transform
-            hover:scale-110 hover:bg-gradient-to-tr ${action.gradient}
-          `}
+                        group relative w-10 h-10 rounded-full flex items-center justify-center
+                        bg-gray-100 dark:bg-gray-800 shadow-sm
+                        transition-transform duration-200 transform
+                        hover:scale-110 hover:bg-gradient-to-tr ${action.gradient}
+                    `}
                 >
                     <action.Icon className="w-5 h-5 text-gray-800 dark:text-gray-100 group-hover:text-white" />
 
-                    {/* Tooltip */}
                     <span
                         className="
-              absolute right-full ml-5 top-1/2 -translate-y-1/2
-              whitespace-nowrap rounded-md px-2 py-1 text-xs font-medium
-              bg-black/70 text-white opacity-0 group-hover:opacity-100
-              translate-x-1 group-hover:translate-x-2
-              transition-all duration-200
-            "
+                            absolute right-full ml-5 top-1/2 -translate-y-1/2
+                            whitespace-nowrap rounded-md px-2 py-1 text-xs font-medium
+                            bg-black/70 text-white opacity-0 group-hover:opacity-100
+                            translate-x-1 group-hover:translate-x-2
+                            transition-all duration-200
+                        "
                         aria-hidden="true"
                     >
                         {action.label}
@@ -77,18 +89,21 @@ const StickyActions = React.memo(() => {
 
             {/* Sticky Actions */}
             <AnimatePresence>
-                {isVisible && (
+                {isVisible && pageLoaded && (
                     <motion.div
                         className="flex flex-col items-center gap-3 mt-2"
                         variants={containerVariants}
                         initial="hidden"
-                        animate="visible"
+                        animate={pageLoaded ? "visible" : "hidden"} // only animate after page load
                         exit={{ opacity: 0, y: 30, transition: { duration: 0.2 } }}
                     >
                         {renderedActions}
                     </motion.div>
+
+
                 )}
             </AnimatePresence>
+
         </div>
     );
 });

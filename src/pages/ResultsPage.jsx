@@ -9,7 +9,7 @@ import { Image } from "lucide-react";
 const ResultCard = React.memo(function ResultCard({ item, onSelect }) {
   return (
     <div
-      className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-5 flex flex-col items-center text-center transition-transform hover:scale-105 duration-300 cursor-pointer outline-2 outline-gray-200 dark:outline-gray-700"
+      className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-5 flex flex-col items-center text-center transition-transform hover:scale-105 duration-300 cursor-pointer outline-2 outline-gray-200 dark:outline-gray-700 max-w-lg"
       onClick={() => item.image && onSelect(item.image)}
     >
       {/* Course Title */}
@@ -38,7 +38,7 @@ const ResultCard = React.memo(function ResultCard({ item, onSelect }) {
 
       {/* Image */}
       {item.image && (
-        <div className="relative w-full h-44 rounded-lg overflow-hidden border border-gray-300 dark:border-gray-700">
+        <div className="relative aspect-[16/9] w-full max-w-lg rounded-lg overflow-hidden border border-gray-300 dark:border-gray-700">
           <img
             src={item.image}
             alt={`${item.course} result`}
@@ -56,17 +56,18 @@ const ResultCard = React.memo(function ResultCard({ item, onSelect }) {
 export default function ResultsPage() {
   const [selected, setSelected] = useState(null);
 
-  // 🔹 Memoize subjects
-  const allSubjects = useMemo(
-    () => Array.from(new Set(results.map((r) => r.course))),
-    []
-  );
+  const allSubjects = useMemo(() => {
+    const subjects = Array.from(new Set(results.map((r) => r.course)));
+    return ["All", ...subjects];
+  }, []);
 
-  const [activeTab, setActiveTab] = useState(allSubjects[0]);
+  const [activeTab, setActiveTab] = useState("All");
 
-  // 🔹 Memoize filtered results
   const filteredResults = useMemo(
-    () => results.filter((r) => r.course === activeTab),
+    () =>
+      activeTab === "All"
+        ? results
+        : results.filter((r) => r.course === activeTab),
     [results, activeTab]
   );
 
@@ -103,11 +104,12 @@ export default function ResultsPage() {
       </div>
 
       {/* Result Cards */}
-      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="flex flex-wrap justify-center gap-6">
         {filteredResults.map((item, index) => (
           <ResultCard key={index} item={item} onSelect={handleSelect} />
         ))}
       </div>
+
 
       {/* Image Modal */}
       {selected && (

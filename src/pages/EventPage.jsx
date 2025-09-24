@@ -45,19 +45,21 @@ export default function EventsPage() {
         return (
             <>
                 <h2 className="text-2xl font-bold mt-10 mb-4 text-gray-900 dark:text-white">{title}</h2>
-                <motion.div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <motion.div className="flex flex-wrap justify-center gap-8">
                     {list.map((event, idx) => (
                         <motion.div
                             key={event.id + idx}
+                            // className="w-full sm:w-[48%] md:w-[45%] lg:w-[30%]"
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, amount: 0.2 }}
                             transition={{ duration: 0.5, ease: "easeOut", delay: idx * 0.05 }}
                         >
-                            <EventCard event={event} variant="default" /> {/* make EventCard handle dark mode */}
+                            <EventCard event={event} variant="default" />
                         </motion.div>
                     ))}
                 </motion.div>
+
             </>
         );
     }, []);

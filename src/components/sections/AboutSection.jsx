@@ -10,7 +10,7 @@ export default function AboutSection() {
 
                 {/* Left Content */}
                 <motion.div
-                    className="md:w-full z-10"
+                    className="md:w-1/2 z-10"
                     initial={{ opacity: 0, x: -60 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
@@ -22,7 +22,7 @@ export default function AboutSection() {
                     <h3 className="text-xl font-semibold text-sky-600 dark:text-sky-400 mb-3">
                         Empowering Bannu’s Talent with IT Skills
                     </h3>
-                    <p className="text-gray-700 dark:text-gray-300 mb-0 leading-relaxed">
+                    <p className="text-gray-700 dark:text-gray-300  leading-relaxed">
                         Located in the heart of Bannu on Railway Road, Syed Software Institute delivers
                         hands-on, industry-aligned training in full-stack development, mobile & web
                         applications, graphic design, animation, and digital marketing. With modern
@@ -36,6 +36,21 @@ export default function AboutSection() {
                     >
                         Learn More
                     </Link>
+                </motion.div>
+
+                {/* Right Image */}
+                <motion.div
+                    className="md:w-1/2 rounded-xl overflow-hidden shadow-lg"
+                    initial={{ opacity: 0, x: 60 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
+                    viewport={{ once: true }}
+                >
+                    <img
+                        src="https://res.cloudinary.com/dzo12ba3f/image/upload/v1751613266/freepik__the-style-is-candid-image-photography-with-natural__4919_ynpvyo.jpg"
+                        alt="Syed Software Institute"
+                        className="w-full h-auto object-cover rounded-xl"
+                    />
                 </motion.div>
 
             </div>

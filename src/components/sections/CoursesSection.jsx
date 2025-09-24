@@ -32,14 +32,18 @@ export default function CoursesSection() {
 
             {/* Display top 3 courses */}
             <motion.div
-                className="grid sm:grid-cols-2 md:grid-cols-3 gap-8  mt-12"
+                className="flex flex-wrap justify-center gap-6 mt-12 w-full"
                 variants={containerVariants}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true, amount: 0.2 }}
             >
                 {Courses.slice(0, 3).map((course) => (
-                    <motion.div key={course.id} variants={cardVariants}>
+                    <motion.div
+                        key={course.id}
+                        variants={cardVariants}
+                        className=""
+                    >
                         <Card
                             image={course.image}
                             title={course.title}
@@ -47,14 +51,13 @@ export default function CoursesSection() {
                             buttonText="View Details"
                             variant="course"
                             onClick={() =>
-                                navigate(`/course/${course.id}`, {
-                                    state: { selectedCourse: course.id },
-                                })
+                                navigate(`/course/${course.id}`, { state: { selectedCourse: course.id } })
                             }
                         />
                     </motion.div>
                 ))}
             </motion.div>
+
 
             {/* Action Buttons */}
             <motion.div

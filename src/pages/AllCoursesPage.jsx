@@ -43,12 +43,13 @@ export default function AllCoursesPage() {
 
             {/* Courses Grid */}
             <motion.div
-                className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-12"
+                className="flex flex-wrap justify-center gap-4 sm:gap-6 lg:gap-8 mt-12"
                 variants={containerVariants}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true, amount: 0.2 }}
             >
+
                 {coursesList.map((course, idx) => (
                     <motion.div key={course.id} variants={cardVariants}>
                         <Card
@@ -62,6 +63,6 @@ export default function AllCoursesPage() {
                     </motion.div>
                 ))}
             </motion.div>
-        </SectionContainer>
+        </SectionContainer >
     );
 }
