@@ -73,15 +73,17 @@ export default function EventCard({ event }) {
                 </h4>
 
                 {/* Description */}
-                <p className="text-sm md:text-base text-gray-600 dark:text-gray-400 text-center line-clamp-3 flex-1">
-                    {event.description}
-                </p>
+                <div className=" flex-1 flex items-center overflow-hidden">
+                    <p className={`text-sm md:text-base text-gray-600 dark:text-gray-400 text-center`}>
+                        {event.description}
+                    </p></div>
                 {/* </div> */}
 
                 {/* Click hint */}
-                <span className="mt-2 text-xs text-blue-600 dark:text-blue-400 font-medium">
-                    📅 View Event Details
-                </span>
+                {event.images && event.videos && (
+                    <span className="mt-2 text-xs text-blue-600 dark:text-blue-400 font-medium">
+                        📅 View Event Details
+                    </span>)}
             </div>
 
             {open && (
