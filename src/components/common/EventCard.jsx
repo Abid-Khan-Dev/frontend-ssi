@@ -1,33 +1,41 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import EventModal from "./EventModal";
 import { Video, Image, Play, Calendar } from "lucide-react";
 
 export default function EventCard({ event }) {
     const [open, setOpen] = useState(false);
     const mediaItems = [...(event.images || []), ...(event.videos || [])];
-
+    const [expanded, setExpanded] = useState(false);
+    const [isTruncated, setIsTruncated] = useState(false);
     const imagesCount = event.images?.length || 0;
     const videosCount = event.videos?.length || 0;
+    const descRef = useRef(null)
+    console.log(descRef, 'descRef');
 
-
+    useEffect(() => {
+        if (descRef.current) {
+            setIsTruncated(descRef.current.scrollHeight > descRef.current.clientHeight);
+        }
+    }, [])
     return (
         <>
             <div
                 className={`
-          relative flex flex-col justify-start items-center p-6 rounded-3xl
+          relative flex flex-col justify-center items-center p-6 rounded-3xl
           shadow-sm hover:shadow-xl dark:shadow-gray-800 transform transition duration-300
-          overflow-hidden max-w-sm mx-auto h-[400px] min-h-[400px]
+          overflow-hidden max-w-md mx-auto h-auto min-h-[400px]
           bg-white dark:bg-gray-900 cursor-pointer
           outline-2 outline-gray-200 dark:outline-gray-700
           group
         `}
-                onClick={() => setOpen(true)}
+
             >
 
 
                 {/* Media Thumbnail */}
                 {event.images?.[0] && (
-                    <div className="relative overflow-hidden aspect-[16/9] w-full rounded-2xl border border-gray-300 dark:border-gray-700 mb-4 group-hover:scale-105 transition-transform duration-300">
+                    <div className="relative overflow-hidden aspect-[16/9] w-full rounded-2xl border border-gray-300 dark:border-gray-700 mb-4 group-hover:scale-105 transition-transform duration-300"
+                        onClick={() => setOpen(true)}>
                         <img
                             src={event.images[0]}
                             alt={event.title}
@@ -66,24 +74,32 @@ export default function EventCard({ event }) {
                         <Video className="w-12 h-12 text-gray-500" />
                     </div>
                 )}
-                {/* <div className={`flex flex-col items-center text-center space-y-3 `}> */}
                 {/* Title */}
-                <h4 className="text-lg md:text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2 text-center truncate">
+                <h4 className={`text-lg md:text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2 text-center truncate ${!event.images && !event.videos && 'mb-4'}`}>
                     {event.title}
                 </h4>
 
                 {/* Description */}
-                <div className=" flex-1 flex items-center overflow-hidden">
-                    <p className={`text-sm md:text-base text-gray-600 dark:text-gray-400 text-center`}>
+                <div className=" flex items-center flex-col overflow-hidden">
+                    <p className={`text-sm md:text-base text-gray-600 dark:text-gray-400 text-start ${!expanded && "line-clamp-3"}`}
+                        ref={descRef}>
                         {event.description}
-                    </p></div>
-                {/* </div> */}
+                    </p>
+                    {isTruncated &&
+                        <button
+                            onClick={() => setExpanded(!expanded)}
+                            className="text-blue-500 text-xs mt-1 hover:underline"
+                        >
+                            {expanded ? "Read less" : "Read more"}
+                        </button>
+                    }
+                </div>
 
                 {/* Click hint */}
-                {event.images && event.videos && (
+                {/* {event.images && event.videos && (
                     <span className="mt-2 text-xs text-blue-600 dark:text-blue-400 font-medium">
                         📅 View Event Details
-                    </span>)}
+                    </span>)} */}
             </div>
 
             {open && (

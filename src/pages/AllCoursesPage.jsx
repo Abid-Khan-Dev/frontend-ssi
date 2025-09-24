@@ -50,7 +50,7 @@ export default function AllCoursesPage() {
                 viewport={{ once: true, amount: 0.2 }}
             >
 
-                {coursesList.map((course, idx) => (
+                {coursesList.map((course) => (
                     <motion.div key={course.id} variants={cardVariants}>
                         <Card
                             image={course.image}

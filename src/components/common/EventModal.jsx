@@ -112,22 +112,22 @@ const EventModal = React.memo(({ items = [], initialIndex = 0, onClose }) => {
                                 onClick={prevSlide}
                                 className="absolute left-4 top-1/2 -translate-y-1/2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100 hover:bg-gray-300 dark:hover:bg-gray-600 p-3 rounded-full shadow transition"
                             >
-                                <ChevronLeft className="w-6 h-6" />
+                                <ChevronLeft className="w-6 h-6 hover:cursor-pointer" />
                             </button>
                             <button
                                 onClick={nextSlide}
-                                className="absolute right-4 top-1/2 -translate-y-1/2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100 hover:bg-gray-300 dark:hover:bg-gray-600 p-3 rounded-full shadow transition"
+                                className="absolute right-4 top-1/2 -translate-y-1/2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100 hover:bg-gray-300 dark:hover:bg-gray-600 p-3 rounded-full shadow transition cursor-pointer"
                             >
-                                <ChevronRight className="w-6 h-6" />
+                                <ChevronRight className="w-6 h-6 hover:cursor-pointer" />
                             </button>
                         </>
                     )}
 
                     <button
                         onClick={onClose}
-                        className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100 hover:bg-red-500 hover:text-white rounded-full shadow-lg transition"
+                        className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100 hover:bg-red-500 hover:text-white rounded-full shadow-lg transition cursor-pointer"
                     >
-                        <X className="w-6 h-6" />
+                        <X className="w-6 h-6 hover:text-red-600" />
                     </button>
                 </motion.div>
             </motion.div>

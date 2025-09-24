@@ -1,5 +1,4 @@
-// src/pages/ResultsPage.jsx
-import React, { useState, useMemo, useCallback } from "react";
+import React, { useState, useMemo, useCallback, useEffect, useRef } from "react";
 import { results } from "../data/results";
 import SectionContainer from "../components/common/SectionContainer";
 import SectionHeader from "../components/common/SectionHeader";
@@ -7,10 +6,20 @@ import EventModal from "../components/common/EventModal";
 import { Image } from "lucide-react";
 
 const ResultCard = React.memo(function ResultCard({ item, onSelect }) {
+  const [isTruncated, setIsTruncated] = useState(false)
+  const [expanded, setExpanded] = useState(false);
+  const descRef = useRef(null)
+  console.log(descRef);
+
+  useEffect(() => {
+    if (descRef.current) {
+      setIsTruncated(descRef.current.scrollHeight > descRef.current.clientHeight);
+    }
+  }, [item.description])
   return (
     <div
-      className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-5 flex flex-col items-center text-center transition-transform hover:scale-105 duration-300 cursor-pointer outline-2 outline-gray-200 dark:outline-gray-700 max-w-lg"
-      onClick={() => item.image && onSelect(item.image)}
+      className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-5 flex flex-col items-center text-center transition-transform hover:scale-105 duration-300  outline-2 outline-gray-200 dark:outline-gray-700 overflow-hidden max-w-sm min-w-sm mx-auto h-auto min-h-[300px]"
+
     >
       {/* Course Title */}
       <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">
@@ -19,9 +28,24 @@ const ResultCard = React.memo(function ResultCard({ item, onSelect }) {
 
       {/* Description */}
       {item.description && (
-        <p className="text-sm text-gray-600 dark:text-gray-400 mb-3 line-clamp-3">
-          {item.description}
-        </p>
+        <>
+
+          <p className={`text-sm text-gray-600 dark:text-gray-400 mb-1 ${!expanded && "line-clamp-3"}`}
+            ref={descRef}
+          >
+            {item.description}
+          </p>
+
+
+          {isTruncated &&
+            <button
+              onClick={() => setExpanded(!expanded)}
+              className="text-blue-500 text-xs mb-3 hover:underline cursor-pointer"
+            >
+              {expanded ? "Read less" : "Read more"}
+            </button>}
+        </>
+
       )}
 
       {/* Marks / Date */}
@@ -32,21 +56,25 @@ const ResultCard = React.memo(function ResultCard({ item, onSelect }) {
           </span>
         </div>
       )}
-      {item.date && (
-        <span className="text-sm text-gray-400 mb-3">{item.date}</span>
-      )}
+
 
       {/* Image */}
       {item.image && (
-        <div className="relative aspect-[16/9] w-full max-w-lg rounded-lg overflow-hidden border border-gray-300 dark:border-gray-700">
+        <div className="relative aspect-[16/9] w-full max-w-lg rounded-lg overflow-hidden border border-gray-300 dark:border-gray-700 cursor-pointer">
           <img
             src={item.image}
             alt={`${item.course} result`}
             className="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-105"
+            onClick={() => item.image && onSelect(item.image)}
           />
           <div className="absolute top-2 right-2 flex items-center bg-gray-800/60 dark:bg-gray-200/30 text-white dark:text-gray-900 text-xs font-semibold px-2 py-1 rounded-full">
             <Image className="w-3 h-3 mr-1" /> View
           </div>
+        </div>
+      )}
+      {item.date && (
+        <div className="w-full flex justify-end mt-5">
+          <span className="text-sm text-gray-400 mb-3">{item.date}</span>
         </div>
       )}
     </div>
@@ -104,7 +132,7 @@ export default function ResultsPage() {
       </div>
 
       {/* Result Cards */}
-      <div className="flex flex-wrap justify-center gap-6">
+      <div className="flex flex-wrap justify-center gap-4 sm:gap-6 lg:gap-0 mt-12">
         {filteredResults.map((item, index) => (
           <ResultCard key={index} item={item} onSelect={handleSelect} />
         ))}
