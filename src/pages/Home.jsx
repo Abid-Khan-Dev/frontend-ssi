@@ -22,7 +22,7 @@ export default function Home() {
             <CoursesSection />
             <AdmissionsSection />
             <AchievementsSection />
-            <MembersSection />
+            {/* <MembersSection /> */}
             <ContactSection />
         </>
     );

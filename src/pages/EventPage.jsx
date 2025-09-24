@@ -43,7 +43,7 @@ export default function EventsPage() {
     const renderSection = useCallback((title, list) => {
         if (!list.length) return null;
         return (
-            <>
+            <div className="min-h-screen">
                 <h2 className="text-2xl font-bold mt-10 mb-4 text-gray-900 dark:text-white">{title}</h2>
                 <motion.div className="flex flex-wrap justify-center gap-8">
                     {list.map((event, idx) => (
@@ -60,7 +60,7 @@ export default function EventsPage() {
                     ))}
                 </motion.div>
 
-            </>
+            </div>
         );
     }, []);
 

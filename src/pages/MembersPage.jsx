@@ -31,7 +31,7 @@ export default function MembersPage() {
 
             {/* Members Grid */}
             <motion.div
-                className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-8 px-4 md:px-0"
+                className="flex flex-wrap justify-center gap-4 sm:gap-6 lg:gap-8 mt-12"
                 variants={containerVariants}
                 initial="hidden"
                 whileInView="show"

@@ -31,7 +31,6 @@ export default function AllCoursesPage() {
 
     return (
         <SectionContainer
-            bg="bg-white dark:bg-gray-900 transition-colors duration-500"
             id="all-courses"
         >
             {/* Page Header */}

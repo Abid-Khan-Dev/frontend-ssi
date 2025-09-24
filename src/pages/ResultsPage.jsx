@@ -18,7 +18,7 @@ const ResultCard = React.memo(function ResultCard({ item, onSelect }) {
   }, [item.description])
   return (
     <div
-      className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-5 flex flex-col items-center text-center transition-transform hover:scale-105 duration-300  outline-2 outline-gray-200 dark:outline-gray-700 overflow-hidden max-w-sm min-w-sm mx-auto h-auto min-h-[300px]"
+      className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-5 flex flex-col items-center text-center transition-transform hover:scale-105 duration-300  outline-2 outline-gray-200 dark:outline-gray-700 overflow-hidden max-w-sm min w-full  h-auto min-h-[300px] relative"
 
     >
       {/* Course Title */}
@@ -60,7 +60,7 @@ const ResultCard = React.memo(function ResultCard({ item, onSelect }) {
 
       {/* Image */}
       {item.image && (
-        <div className="relative aspect-[16/9] w-full max-w-lg rounded-lg overflow-hidden border border-gray-300 dark:border-gray-700 cursor-pointer">
+        <div className="relative aspect-[16/9] w-full max-w-lg rounded-lg overflow-hidden border border-gray-300 dark:border-gray-700 cursor-pointer mb-10">
           <img
             src={item.image}
             alt={`${item.course} result`}
@@ -73,7 +73,7 @@ const ResultCard = React.memo(function ResultCard({ item, onSelect }) {
         </div>
       )}
       {item.date && (
-        <div className="w-full flex justify-end mt-5">
+        <div className="w-full flex justify-end mt-5 absolute bottom-3 right-5">
           <span className="text-sm text-gray-400 mb-3">{item.date}</span>
         </div>
       )}
@@ -132,11 +132,12 @@ export default function ResultsPage() {
       </div>
 
       {/* Result Cards */}
-      <div className="flex flex-wrap justify-center gap-4 sm:gap-6 lg:gap-0 mt-12">
+      <div className="flex flex-wrap justify-center gap-10">
         {filteredResults.map((item, index) => (
           <ResultCard key={index} item={item} onSelect={handleSelect} />
         ))}
       </div>
+
 
 
       {/* Image Modal */}
