@@ -25,7 +25,6 @@ export default function AchievementsSection() {
             <SectionHeader
                 title="Our Achievements"
                 subtitle="Projects That Showcase Our Expertise"
-                description="Click on any project to view it in full screen."
             />
 
             {categories.map(cat => {
@@ -34,7 +33,7 @@ export default function AchievementsSection() {
                 const displayedItems = items.slice(0, visibleCount);
 
                 return (
-                    <div key={cat} className="mt-12">
+                    <div key={cat} className="mt-6">
                         <h3 className="text-xl font-bold mb-4 text-gray-800 dark:text-gray-200">{cat}</h3>
 
                         <motion.div className="flex flex-wrap justify-center gap-4">
