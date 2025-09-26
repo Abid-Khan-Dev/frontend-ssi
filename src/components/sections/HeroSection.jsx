@@ -81,7 +81,7 @@ function HeroSection() {
         <section className="relative flex items-center justify-center min-h-screen 
             bg-gradient-to-b from-sky-50 to-white 
             dark:from-[#0a0f1c] dark:to-[#111827] 
-            overflow-hidden transition-colors duration-500">
+            overflow-hidden transition-colors duration-500 pt-20">
 
             {/* Floating Particles */}
             {particles}
@@ -113,7 +113,7 @@ function HeroSection() {
                 {/* Right 3D Model */}
                 <motion.div className="flex justify-center items-center h-[500px]" variants={modelVariants}>
 
-                    <ThreeModel modelPath={'./models/robot_playground.glb'} scale={2.2} alt="3D model of a robot" />
+                    <ThreeModel modelPath={'./models/robot_playground.glb'} scale={1.8} alt="3D model of a robot" />
                 </motion.div>
             </div>
 

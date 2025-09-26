@@ -16,7 +16,7 @@ const ThreeModel = React.memo(({ modelPath, scale = 1.5, autoRotate = true, minH
             0.1,
             1000
         );
-        camera.position.set(0, 2, 8);
+        camera.position.set(0, 1.5, 8);
 
         // Renderer
         const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });

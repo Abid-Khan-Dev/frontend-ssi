@@ -13,6 +13,7 @@ export default function ContactSection() {
     return (
         <SectionContainer
             id="contact"
+            contact={true}
         >
             {/* Section Header */}
             <motion.div
@@ -25,6 +26,7 @@ export default function ContactSection() {
                     title="Let’s Connect Today"
                     subtitle="We’re Here to Help You Succeed"
                     description="Reach out for inquiries, guidance, or collaborations. Our team is always ready to assist you in your learning journey."
+                    contact={true}
                 />
             </motion.div>
 
